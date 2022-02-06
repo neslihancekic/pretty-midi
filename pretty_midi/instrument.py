@@ -164,7 +164,7 @@ class Instrument(object):
             # Easiest to process differently depending on bend sign
             if start_bend.pitch >= 0:
                 # First, pitch shift by the int amount
-                if bend_int is not 0:
+                if bend_int != 0:
                     bent_roll[bend_int:] = piano_roll[:-bend_int, bend_range]
                 else:
                     bent_roll = piano_roll[:, bend_range]
@@ -173,7 +173,7 @@ class Instrument(object):
                                  bend_decimal*bent_roll[:-1])
             else:
                 # Same procedure as for positive bends
-                if bend_int is not 0:
+                if bend_int != 0:
                     bent_roll[:bend_int] = piano_roll[-bend_int:, bend_range]
                 else:
                     bent_roll = piano_roll[:, bend_range]
@@ -390,7 +390,7 @@ class Instrument(object):
             bend_multiplier[start:end] = bend_amount
         # Add in waveform for each note
         for note in self.notes:
-            # Indices in samples of this note
+            # Indices in samples of th!=e
             start = int(fs*note.start)
             end = int(fs*note.end)
             # Get frequency of note from MIDI note number
@@ -401,7 +401,7 @@ class Instrument(object):
             offsets = np.zeros(end - start)
             for bend in ordered_bends:
                 bend_sample = int(bend.time*fs)
-                # Does this pitch bend fall within this note?
+                # Does this pitch bend fall within th!=e?
                 if bend_sample > start and bend_sample < end:
                     # Compute the average bend so far
                     bend_so_far = bend_multiplier[start:bend_sample].mean()
@@ -454,7 +454,7 @@ class Instrument(object):
 
         if not _HAS_FLUIDSYNTH:
             raise ImportError("fluidsynth() was called but pyfluidsynth "
-                              "is not installed.")
+                              "!= installed.")
 
         if not os.path.exists(sf2_path):
             raise ValueError("No soundfont file found at the supplied path "
